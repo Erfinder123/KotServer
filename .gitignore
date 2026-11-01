@@ -1,0 +1,56 @@
+# IDE state and user-specific settings
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+/KotServer.client/.vscode/*
+!/KotServer.client/.vscode/extensions.json
+/KotServer.client/**/*.ntvs*
+/KotServer.client/**/*.njsproj
+
+# .NET build, restore, publish, and test output
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+
+# JavaScript dependencies, builds, and caches
+node_modules/
+/KotServer.client/dist/
+/KotServer.client/dist-ssr/
+.vite/
+.vite-temp/
+.cache/
+.npm/
+.pnpm-store/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+coverage/
+.nyc_output/
+
+# Logs and temporary files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+tmp/
+temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Client-specific local and temporary files
+/KotServer.client/**/*.local
+/KotServer.client/**/.DS_Store
+/KotServer.client/**/*.sw?

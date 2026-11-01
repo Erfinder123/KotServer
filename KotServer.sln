@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "KotServer.server\Server.csproj", "{D0ECE3A4-1883-4B09-8C1E-268AE1FC22C1}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "KotServer.client\Client.esproj", "{914D163E-01ED-40C0-8ED3-874FE7DF549E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0ECE3A4-1883-4B09-8C1E-268AE1FC22C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {D0ECE3A4-1883-4B09-8C1E-268AE1FC22C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {D0ECE3A4-1883-4B09-8C1E-268AE1FC22C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {D0ECE3A4-1883-4B09-8C1E-268AE1FC22C1}.Release|Any CPU.Build.0 = Release|Any CPU
+
+        {914D163E-01ED-40C0-8ED3-874FE7DF549E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {914D163E-01ED-40C0-8ED3-874FE7DF549E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {914D163E-01ED-40C0-8ED3-874FE7DF549E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {914D163E-01ED-40C0-8ED3-874FE7DF549E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

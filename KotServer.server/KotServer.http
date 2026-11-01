@@ -1,0 +1,6 @@
+@KotServer_HostAddress = http://localhost:5127
+
+GET {{KotServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

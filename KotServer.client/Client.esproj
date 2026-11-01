@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.127-alpha">
+  <PropertyGroup>
+    <StartupCommand>npm run dev</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <BuildCommand>npm run build</BuildCommand>
+  </PropertyGroup>
+</Project>
