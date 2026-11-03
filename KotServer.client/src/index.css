@@ -2,15 +2,6 @@
   box-sizing: border-box;
 }
 
-#root {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-
 body {
   margin: 0;
-  height: 100%;
-  overflow: hidden;
 }
