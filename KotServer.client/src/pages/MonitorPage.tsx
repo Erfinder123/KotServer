@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router'
+import { useState } from "react";
 import { motion } from 'motion/react'
 import monitorImage from '../assets/home.png'
 import monitorView from "../settings/monitorSettings.ts";
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router'
 function MonitorPage() {
     const location = useLocation()
     const navigate = useNavigate()
+    const [enter, setEnter] = useState(() => sessionStorage.getItem('monitor') !== 'true')
 
     const screen = {
         left: 31.8,
@@ -15,25 +17,24 @@ function MonitorPage() {
         height: 35.7,
     }
 
-    const getMonitorStyle = () => {
-        const {scale, x, y, originX, originY} = monitorView
-
-        const left =
+    const {scale, x, y, originX, originY} = monitorView
+    
+    const contentStyle = {
+        left: `${
             originX * 100 +
             (screen.left - originX * 100) * scale +
             parseFloat(x)
-
-        const top =
+        }%`,
+    
+        top: `${
             originY * 100 +
             (screen.top - originY * 100) * scale +
             parseFloat(y)
-
-        return {
-            left: `${left}%`,
-            top: `${top}%`,
-            width: `${screen.width * scale}%`,
-            height: `${screen.height * scale}%`,
-        }
+        }%`,
+        
+        width: `${screen.width * scale}%`,
+        
+        height: `${screen.height * scale}%`,
     }
     
     return (
@@ -42,39 +43,51 @@ function MonitorPage() {
                 className="monitor-background"
                 style={{
                     backgroundImage: `url(${monitorImage})`,
-                    ...monitorView
-                }} 
+                    originX,
+                    originY,
+                }}
+                initial={
+                    enter ? {
+                    scale: 1,
+                    x: '0%',
+                    y: '0%',
+                    } : false
+                }
+                animate={{
+                    scale,
+                    x,
+                    y,
+                }}
+                transition={{
+                    duration: 1.6,
+                    ease: 'easeInOut',
+                }}
+                onAnimationComplete={() => {
+                    sessionStorage.setItem('monitor', 'true')
+                    setEnter(false)
+                }}
             />
-            <div 
-                className="monitor-content"
-                style={getMonitorStyle()}
-            >
-                <motion.div
-                    key={location.pathname}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.25 }}
+            {!enter && (
+                <div 
+                    className="monitor-content"
+                    style={contentStyle}
                 >
-                    <Outlet />
-                    <button
-                        style={{
-                            position: 'absolute',
-                            color: "#EAFBFF",
-                            backgroundColor: "#FF5266",
-                            border: "none",
-                            cursor: 'pointer',
-                            right: "16px",
-                            bottom: "16px",
-                            borderRadius: '10px',
-                            padding: "10px 16px",
-                            fontSize: "1rem"
-                        }}
-                        onClick={() => {navigate("/", {state: { monitor: false }})}}
+                    <motion.div
+                        style={{ height: '100%' }}
+                        key={location.pathname}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.25 }}
                     >
-                        Назад
-                    </button>
-                </motion.div>
-            </div>
+                        <Outlet />
+                        <button
+                            onClick={() => {navigate("/", {state: { monitor: false }})}}
+                        >
+                            Назад
+                        </button>
+                    </motion.div>
+                </div>
+            )}
         </div>    
     )
 }

@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import HomePage from './pages/HomePage'
 import PrinterPage from "./pages/PrinterPage.tsx";
 import MonitorPage from "./pages/MonitorPage.tsx";
+import printer from "./components/printer/printer.tsx"
+import NotFoundPage from "./pages/NotFoundPage.tsx";
 
 function App() {
     return (
@@ -10,8 +12,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route element={<MonitorPage />} >
-                    <Route path="/printer" element={<PrinterPage />} />
-                    <Route path="*" element={<p>Страница не найдена</p>} />
+                    <Route path={printer.url} element={<PrinterPage />} />
+                    <Route path="*" element={<NotFoundPage />}
+                />
                 </Route>    
             </Routes>
         </BrowserRouter>
@@ -19,17 +22,3 @@ function App() {
 }
 
 export default App
-
-/*
-function App() {
-    return (
-        <main className="main">
-            <BaseElement
-                className={printer.className} src={printer.src} alt={printer.alt}
-            />
-        </main>
-  );
-}
-
-export default App
-*/
