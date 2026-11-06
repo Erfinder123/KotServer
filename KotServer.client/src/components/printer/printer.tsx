@@ -9,3 +9,14 @@ const printer: INavigationItem = {
 }
 
 export default printer;
+
+
+export interface Printer {
+    id: number;
+    name: string;
+}
+
+export interface Print {
+    id: number;
+    pages: string;
+}
