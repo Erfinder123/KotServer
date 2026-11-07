@@ -1,15 +1,16 @@
 import { useGetPrintersQuery, useProcessFileMutation, usePrintMutation } from "../api/printerApi.ts";
 import { type ChangeEvent, useState } from "react";
-import { type Printer, type Print } from "../components/printer/printer.tsx";
+import { pagesConverter, type IPrinter, type IPrint, type ICheckPages } from "../components/printer/printer.tsx";
 
 
 function PrinterPage() {
     const { data: printers } = useGetPrintersQuery()
-    const [printer, setPrinter] = useState<Printer | undefined>(undefined)
+    const [printer, setPrinter] = useState<IPrinter | undefined>(undefined)
     const [processFile, { data: pageCount, isSuccess, isError }] = useProcessFileMutation()
     const [pages, setPages] = useState<string>("")
     const [all, setAll] = useState<boolean>(true)
     const [print] = usePrintMutation()
+    const [edit, setEdit] = useState<boolean>(false)
     
     const one = printers?.length == 1
     const printersNotFound = (printers?.length ?? 0) == 0
@@ -31,11 +32,20 @@ function PrinterPage() {
     }
     
     const checkAndPrint = () => {
-        const _print: Print = {
-            id: printer?.id ?? -1,
-            pages: pages,
+        const _edit: ICheckPages = { edit: false }
+        let result = pagesConverter(pages, _edit)
+        if (_edit.edit) {
+            setPages(pagesConverter(result))
+            setEdit(true)
         }
-        print(_print)
+        else {
+            const _print: IPrint = {
+                id: printer?.id ?? -1,
+                pages: result,
+            }
+            setEdit(false)
+            print(_print)
+        }
     }
     
     return (
@@ -126,13 +136,22 @@ function PrinterPage() {
                         bottom: "unset",
                         backgroundColor: "#142B49",
                         border: "1px solid #40DFFF",
+                        position: 'static'
                     }}
                     disabled={!isSuccess || printersNotFound}
                     onClick={checkAndPrint}
                 >
-                    Печать
+                    {edit ? "Продолжить" : "Печать"}
                 </button>
             </div>
+            {edit && (
+                <p style={{ 
+                    color: "#FF5266",
+                    fontSize: "24px",
+                }}>
+                    Проверьте правильность ввода номеров страницы и нажмите "Продолжить"
+                </p>
+            )}
         </>
     )
 }

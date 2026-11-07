@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import printer, { type Printer, type Print } from "../components/printer/printer.tsx";
+import printer, { type IPrinter, type IPrint } from "../components/printer/printer.tsx";
 
 export const printerApi = createApi({
     reducerPath: 'printerApi',
@@ -8,7 +8,7 @@ export const printerApi = createApi({
     }),
     tagTypes: ['Printer'],
     endpoints: (builder) => ({
-        getPrinters: builder.query<Array<Printer>, void>({
+        getPrinters: builder.query<Array<IPrinter>, void>({
             query: () => "",
             providesTags: ["Printer"],
         }),
@@ -21,8 +21,8 @@ export const printerApi = createApi({
             }),
         }),
 
-        print: builder.mutation<void, Print>({
-            query: (print: Print) => ({
+        print: builder.mutation<void, IPrint>({
+            query: (print: IPrint) => ({
                 url: `/print`,
                 method: "POST",
                 body: print,
